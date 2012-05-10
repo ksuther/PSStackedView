@@ -1276,7 +1276,6 @@ enum {
                                      }break;
                                          
                                      case PSSVBounceNone:
-                                         [self delegateDidAlign];
                                      case PSSVBounceBack:
                                          [self delegateDidAlign];
 
