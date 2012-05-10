@@ -1419,10 +1419,12 @@ enum {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.rootViewController viewWillAppear:animated];
-    for (UIViewController *controller in self.viewControllers) {
-        [controller viewWillAppear:animated];
-    }
+    IF_PRE_IOS5(
+        [self.rootViewController viewWillAppear:animated];
+        for (UIViewController *controller in self.viewControllers) {
+            [controller viewWillAppear:animated];
+        }
+    )
     
     // enlarge/shrinken stack
     [self updateViewControllerSizes];
@@ -1433,28 +1435,34 @@ enum {
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.rootViewController viewDidAppear:animated];
-    for (UIViewController *controller in self.viewControllers) {
-        [controller viewDidAppear:animated];
-    }
+    IF_PRE_IOS5(
+        [self.rootViewController viewDidAppear:animated];
+        for (UIViewController *controller in self.viewControllers) {
+            [controller viewDidAppear:animated];
+        }
+    )
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [self.rootViewController viewWillDisappear:animated];
-    for (UIViewController *controller in self.viewControllers) {
-        [controller viewWillDisappear:animated];
-    }
+    IF_PRE_IOS5(
+        [self.rootViewController viewWillDisappear:animated];
+        for (UIViewController *controller in self.viewControllers) {
+            [controller viewWillDisappear:animated];
+        }
+    )
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
-    [self.rootViewController viewDidDisappear:animated];
-    for (UIViewController *controller in self.viewControllers) {
-        [controller viewDidDisappear:animated];
-    }   
+    IF_PRE_IOS5(
+        [self.rootViewController viewDidDisappear:animated];
+        for (UIViewController *controller in self.viewControllers) {
+            [controller viewDidDisappear:animated];
+        }
+    )
 }
 
 - (void)viewDidUnload {
