@@ -18,7 +18,7 @@ enum {
 
 @interface PSSVContainerView : UIView {
     UIView *transparentView_;
-    CGFloat originalWidth_;
+    CGFloat maxWidth_;
     PSSVSide shadow_;
     UIViewController *controller_;
     CAGradientLayer *leftShadowLayer_;
@@ -39,6 +39,8 @@ enum {
 
 /// update shadow
 - (void)updateContainer;
+
+@property(nonatomic, assign) CGFloat maxWidth;
 
 /// set shadow sides
 @property(nonatomic, assign) PSSVSide shadow;

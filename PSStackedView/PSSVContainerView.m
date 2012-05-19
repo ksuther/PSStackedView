@@ -11,7 +11,6 @@
 #import "UIView+PSSizes.h"
 
 @interface PSSVContainerView ()
-@property(nonatomic, assign) CGFloat originalWidth;
 @property(nonatomic, strong) CAGradientLayer *leftShadowLayer;
 @property(nonatomic, strong) CAGradientLayer *innerShadowLayer;
 @property(nonatomic, strong) CAGradientLayer *rightShadowLayer;
@@ -21,7 +20,7 @@
 @implementation PSSVContainerView
 
 @synthesize shadow = shadow_;
-@synthesize originalWidth = originalWidth_;
+@synthesize maxWidth = maxWidth_;
 @synthesize controller = controller_;
 @synthesize leftShadowLayer = leftShadowLayer_;
 @synthesize innerShadowLayer = innerShadowLayer_;
@@ -100,11 +99,8 @@
 - (CGFloat)limitToMaxWidth:(CGFloat)maxWidth; {
     BOOL widthChanged = NO;
     
-    if (maxWidth && self.width > maxWidth) {
-        self.width = maxWidth;
-        widthChanged = YES;
-    }else if(self.originalWidth && self.width < self.originalWidth) {
-        self.width = MIN(maxWidth, self.originalWidth);
+    if ((maxWidth && self.width > maxWidth) || (self.maxWidth && self.width < self.maxWidth)) {
+        self.width = MIN(maxWidth, self.maxWidth);
         widthChanged = YES;
     }
     self.controller.view.width = self.width;
@@ -125,7 +121,7 @@
         controller_ = aController;
         
         // properly embed view
-        self.originalWidth = self.controller.view.width;
+        self.maxWidth = self.controller.view.width;
         controller_.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth; 
         controller_.view.frame = CGRectMake(0, 0, controller_.view.width, controller_.view.height);
         [self addSubview:controller_.view];
