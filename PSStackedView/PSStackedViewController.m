@@ -967,7 +967,7 @@ enum {
     PSSVLog(@"container frame: %@", NSStringFromCGRect(container.frame));
     
     // relay willAppear and add to subview
-    [viewController viewWillAppear:animated];
+    IF_PRE_IOS5([viewController viewWillAppear:animated];) //iOS 5 handles calling viewWillAppear automatically
     
     if (animated) {
         container.alpha = 0.f;
@@ -988,7 +988,7 @@ enum {
     [container layoutIfNeeded];
     //container.width = viewController.view.width; // sync width (after it may has changed in layoutIfNeeded)
     
-    [viewController viewDidAppear:animated];
+    IF_PRE_IOS5([viewController viewDidAppear:animated];) //iOS 5 handles calling viewDidAppear automatically
     [viewControllers_ addObject:viewController];
     
     // register stack controller
